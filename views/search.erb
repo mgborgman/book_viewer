@@ -1,0 +1,28 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+
+<% if params[:query] %>
+	  <!-- # iterate over /data/chp#{index}.txt files
+  # check if file contents include params[:query]
+  # if yes, store index in an array
+  # display chapter titles as links based off saved indices -->
+	<% if @results.empty? %>
+		<h2 class="content-subhead">Sorry, no matches found</h2>
+	<% else %>
+		<div>
+			<h2 class="content-subhead">Results for '<%= params[:query] %>'</h2>
+		</div>
+		<% @results.each do |result| %>
+			<ul>
+				<li><a href="/chapters/<%= result[:number] %>"><%= result[:name] %></a></li>
+				<ul>
+					<li><p><%= in_bold(result[:paragraph]) %></p></li>
+				</ul>
+			</ul>
+	<% end %>
+	<% end %>
+<% end %>
