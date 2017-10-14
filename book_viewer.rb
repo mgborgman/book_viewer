@@ -1,6 +1,6 @@
 require "tilt/erubis"
 require "sinatra"
-require "sinatra/reloader"
+require "sinatra/reloader" if development?
 
 before do
   @table_of_contents = File.readlines("data/toc.txt")
